@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
+
+import { likeFilter } from '@app/common';
 
 import { ProductEntity } from './entity';
 import { CreateProductDto, FindProductDto, UpdateProductDto } from './dto';
@@ -16,7 +18,7 @@ export class ProductService {
     const findEntity = this.productRepo.create(findProductDto);
     const products = await this.productRepo.find({
       where: {
-        ...findEntity,
+        ...likeFilter(findEntity),
       },
     });
 
