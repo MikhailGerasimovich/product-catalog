@@ -1,4 +1,7 @@
-import { ApolloFederationDriver } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,25 +16,26 @@ const DefinitionConfigModule = ConfigModule.forRoot({
   envFilePath: envFilePath,
 });
 
-const DefinitionGraphQLModule = GraphQLModule.forRoot({
-  typePaths: ['./**/*.graphql'],
-  driver: ApolloFederationDriver,
-  context: ({ req }: any) => ({ req }),
-  definitions: {
-    path: gqlClassesPath,
-    outputAs: 'class',
-  },
-});
+const DefinitionGraphQLModule =
+  GraphQLModule.forRoot<ApolloFederationDriverConfig>({
+    typePaths: ['./**/*.graphql'],
+    driver: ApolloFederationDriver,
+    context: ({ req }: any) => ({ req }),
+    definitions: {
+      path: gqlClassesPath,
+      outputAs: 'class',
+    },
+  });
 
 const DefinitionTypeOrmModule = TypeOrmModule.forRootAsync({
   imports: [ConfigModule],
-  useFactory: (configService: ConfigService) => ({
+  useFactory: (config: ConfigService) => ({
     type: 'postgres',
-    host: configService.get('DB_HOST'),
-    port: +configService.get('DB_PORT'),
-    username: configService.get('DB_USERNAME'),
-    password: configService.get('DB_PASSWORD'),
-    database: configService.get('DB_NAME'),
+    host: config.get('DB_HOST'),
+    port: +config.get('DB_PORT'),
+    username: config.get('DB_USERNAME'),
+    password: config.get('DB_PASSWORD'),
+    database: config.get('DB_NAME'),
     synchronize: true,
     autoLoadEntities: true,
     logging: true,

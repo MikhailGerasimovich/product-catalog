@@ -48,7 +48,7 @@ export abstract class IMutation {
 
     abstract update(id: number, input?: Nullable<UpdateProductInput>): Product | Promise<Product>;
 
-    abstract delete(id: number): Nullable<Product> | Promise<Nullable<Product>>;
+    abstract delete(id: number): Nullable<boolean> | Promise<Nullable<boolean>>;
 }
 
 type Nullable<T> = T | null;
