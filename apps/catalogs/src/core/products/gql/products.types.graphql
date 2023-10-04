@@ -1,0 +1,39 @@
+type Product {
+  id: Int!
+  title: String!
+  price: Float!
+  currency: String!
+  quantity: Int!
+}
+
+input CreateProductInput {
+  title: String!
+  price: Float!
+  currency: String!
+  quantity: Int!
+}
+
+input UpdateProductInput {
+  title: String
+  price: Float
+  currency: String
+  quantity: Int
+}
+
+input FindProductInput {
+  title: String
+  price: Float
+  currency: String
+  quantity: Int
+}
+
+type Query {
+  findOne(id: Int!): Product!
+  findAll(input: FindProductInput): [Product!]
+}
+
+type Mutation {
+  create(input: CreateProductInput!): Product!
+  update(id: Int!, input: UpdateProductInput): Product!
+  delete(id: Int!): Boolean
+}
