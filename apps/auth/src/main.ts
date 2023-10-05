@@ -3,10 +3,10 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
-import { CatalogsModule } from './catalogs.module';
+import { AuthModule } from './auth.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(CatalogsModule);
+  const app = await NestFactory.create(AuthModule);
 
   const config = app.get(ConfigService);
 
@@ -14,7 +14,7 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: [config.get<string>('RMQ_URL')],
-      queue: config.get<string>('RMQ_QUEUE_CATALOGS'),
+      queue: config.get<string>('RMQ_QUEUE_AUTH'),
       noAck: true,
       persistent: true,
       queueOptions: {

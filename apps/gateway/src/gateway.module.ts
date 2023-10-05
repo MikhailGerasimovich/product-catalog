@@ -14,11 +14,16 @@ const DefinitionGraphQLModule =
   GraphQLModule.forRootAsync<ApolloGatewayDriverConfig>({
     imports: [ConfigModule],
     driver: ApolloGatewayDriver,
+
     useFactory: (config: ConfigService) => ({
-      server: {},
       gateway: {
         supergraphSdl: new IntrospectAndCompose({
+          subgraphHealthCheck: true,
           subgraphs: [
+            {
+              name: config.get('AUTH_NAME'),
+              url: config.get('AUTH_URL'),
+            },
             {
               name: config.get('CATALOGS_NAME'),
               url: config.get('CATALOGS_URL'),

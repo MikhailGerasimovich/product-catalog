@@ -1,0 +1,17 @@
+type User @key(fields: "id") {
+  id: Int!
+  username: String!
+  email: String!
+  password: String!
+  role: String!
+}
+
+input FindUserInput {
+  username: String
+  email: String
+}
+
+type Query {
+  findOneUser(id: Int!): User!
+  findAllUsers(input: FindUserInput): [User!]
+}

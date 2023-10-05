@@ -1,4 +1,4 @@
-type Product {
+type Product @key(fields: "id") {
   id: Int!
   title: String!
   price: Float!
@@ -28,12 +28,12 @@ input FindProductInput {
 }
 
 type Query {
-  findOne(id: Int!): Product!
-  findAll(input: FindProductInput): [Product!]
+  findOneProduct(id: Int!): Product!
+  findAllProducts(input: FindProductInput): [Product!]
 }
 
 type Mutation {
-  create(input: CreateProductInput!): Product!
-  update(id: Int!, input: UpdateProductInput): Product!
-  delete(id: Int!): Boolean
+  createProduct(input: CreateProductInput!): Product!
+  updateProduct(id: Int!, input: UpdateProductInput): Product!
+  deleteProduct(id: Int!): Boolean
 }

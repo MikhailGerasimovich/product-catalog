@@ -27,6 +27,8 @@ export class ProductService {
 
   async fundOne(id: number) {
     const product = await this.productRepo.findOne({ where: { id } });
+    console.log('ahahahahahaha');
+
     return product;
   }
 
