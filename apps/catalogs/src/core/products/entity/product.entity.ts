@@ -1,19 +1,19 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+// import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('products', { synchronize: true })
-export class ProductEntity extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+// @Entity('products', { synchronize: true })
+// export class ProductEntity extends BaseEntity {
+//   @PrimaryGeneratedColumn()
+//   id: number;
 
-  @Column({ type: 'text', nullable: false })
-  title: string;
+//   @Column({ type: 'text', nullable: false })
+//   title: string;
 
-  @Column({ type: 'real' })
-  price: number;
+//   @Column({ type: 'real' })
+//   price: number;
 
-  @Column({ type: 'text' })
-  currency: string;
+//   @Column({ type: 'text' })
+//   currency: string;
 
-  @Column({ type: 'integer' })
-  quantity: number;
-}
+//   @Column({ type: 'integer' })
+//   quantity: number;
+// }

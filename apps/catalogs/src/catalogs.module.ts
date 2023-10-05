@@ -47,7 +47,7 @@ const DefinitionTypeOrmModule = TypeOrmModule.forRootAsync({
   imports: [
     DefinitionConfigModule,
     DefinitionGraphQLModule,
-    DefinitionTypeOrmModule,
+    // DefinitionTypeOrmModule,
     CoreModule,
   ],
   controllers: [],
